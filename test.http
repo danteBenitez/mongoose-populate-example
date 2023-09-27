@@ -1,0 +1,22 @@
+
+GET http://localhost:8080/api/users HTTP/1.1
+
+###
+POST http://localhost:8080/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "danteBenitez",
+    "email": "benitezdante123@gmail.com"
+}
+
+###
+POST http://localhost:8080/api/publications HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Una nueva publicación",
+    "content": "Contenido de prueba",
+    "authorId": "6514819b732a81e1d76f6f35"
+}
+

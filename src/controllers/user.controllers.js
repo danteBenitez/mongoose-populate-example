@@ -1,3 +1,4 @@
+import { PublicationModel } from "../model/publication.model.js";
 import { UserModel } from "../model/user.model.js";
 
 export async function createUser(req, res) {
@@ -14,10 +15,11 @@ export async function createUser(req, res) {
     }
 }
 
-export async function getAllUsers(req, res) {
+export async function getAllUsers(_req, res) {
     try {
         const users = await UserModel.find().populate('publications', {
             _v: 0,
+            authorId: 0
         });
 
         if (!users || users.length === 0) {
@@ -28,6 +30,7 @@ export async function getAllUsers(req, res) {
         res.status(200).json({
             users
         })
+
     } catch(err) {
         console.log(err);
         res.status(500).json({
@@ -40,6 +43,8 @@ export async function getUser(req, res) {
     const { userId } = req.params;
     try {
         const user = await UserModel.findById(userId).populate('publications', {
+            _v: 0,
+            authorId: 0
         });
 
         if (!user) {
@@ -63,7 +68,11 @@ export async function getUser(req, res) {
 export async function updateUser(req, res) {
     const { userId } = req.params;
     try {
-        const found = await UserModel.findById(userId);
+        const found = await UserModel.findById(userId).populate('publications', {
+            _v: 0,
+            authorId: 0
+        });
+
         if (!found) {
             return res.status(404).json({
                 message: 'Usuario no encontrado'
@@ -86,7 +95,11 @@ export async function updateUser(req, res) {
 export async function deleteUser(req, res) {
     const { userId } = req.params;
     try {
-        const found = await UserModel.findById(userId);
+        const found = await UserModel.findById(userId).populate('authorId', {
+            _v: 0,
+            authorId: 0
+        });
+
         if (!found) {
             return res.status(404).json({
                 message: 'Usuario no encontrado'

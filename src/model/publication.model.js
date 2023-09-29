@@ -6,10 +6,12 @@ const publicationSchema = new Schema({
     authorId: {
         type: Types.ObjectId,
         ref: 'User',
+        autopopulate: true
     }
 }, {
     timestamps: true,
 });
+
 
 export const PublicationModel = model('Publication', publicationSchema);
 

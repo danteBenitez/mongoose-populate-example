@@ -10,6 +10,7 @@ const PORT = 8080;
 
 app.use(express.json());
 app.use('/api/users', userRouter);
+app.use('/api/publications', publicationRouter);
 
 app.listen(PORT, async () => {
     await connectToDb();

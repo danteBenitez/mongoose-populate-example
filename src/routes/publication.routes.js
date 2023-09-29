@@ -8,6 +8,7 @@ import {
 } from "../controllers/publication.controllers.js";
 import { param } from "express-validator";
 import { validate } from "../middleware/validation.js";
+import { createPublicationSchema, updatePublicationSchema } from "../schema/publications.schema.js";
 
 const router = Router();
 
@@ -18,10 +19,10 @@ const idParam = param("publicationId")
 
 router.get("/", getAllPublications);
 router.get("/:publicationId", validate(idParam), getPublication);
-router.post("/", validate(createPublication), createPublication);
+router.post("/", validate(createPublicationSchema), createPublication);
 router.put(
   "/:publicationId",
-  validate(idParam, updatePublication),
+  validate(idParam, updatePublicationSchema),
   updatePublication
 );
 router.delete("/:publicatioId", validate(idParam), deletePublication);

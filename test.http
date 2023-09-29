@@ -15,8 +15,11 @@ POST http://localhost:8080/api/publications HTTP/1.1
 Content-Type: application/json
 
 {
-    "title": "Una nueva publicación",
-    "content": "Contenido de prueba",
-    "authorId": "6514819b732a81e1d76f6f35"
+    "title": "Una nueva publicación - Parte V",
+    "content": "asdad",
+    "authorId": "6516e525268fc9b2a1239e36"
 }
+
+###
+GET http://localhost:8080/api/publications HTTP/1.1
 

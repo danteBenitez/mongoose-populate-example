@@ -1,4 +1,5 @@
 import { Schema, Types, model } from 'mongoose';
+import autoPopulate from 'mongoose-autopopulate';
 
 const userSchema = new Schema({
     username: String,
@@ -6,8 +7,13 @@ const userSchema = new Schema({
     publications: [{
         type: Types.ObjectId,
         ref: 'Publication',
-        default: []
+        default: [],
+        autopopulate: {
+            maxDepth: 1
+        }
     }]
 });
+
+userSchema.plugin(autoPopulate);
 
 export const UserModel = model('User', userSchema);

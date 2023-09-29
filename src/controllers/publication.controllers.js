@@ -7,6 +7,7 @@ export async function createPublication(req, res) {
     const authorFound = await UserModel.findById(authorId);
 
     const newPublication = await PublicationModel.create(req.body)
+    
     await newPublication.populate(
       "authorId",
       {
@@ -14,6 +15,7 @@ export async function createPublication(req, res) {
         publications: 0,
       }
     );
+    
     authorFound.publications.push(newPublication._id);
 
     await authorFound.save();
@@ -31,10 +33,10 @@ export async function createPublication(req, res) {
 
 export async function getAllPublications(_req, res) {
   try {
-    const publications = await PublicationModel.find().populate("authorId", {
+    const publications = await PublicationModel.find()/* .populate("authorId", {
       _v: 0,
       publications: 0,
-    });
+    });*/
 
     if (!publications || publications.length === 0) {
       return res.status(404).json({
@@ -55,13 +57,7 @@ export async function getAllPublications(_req, res) {
 export async function getPublication(req, res) {
   const { publicationId } = req.params;
   try {
-    const user = await PublicationModel.findById(publicationId).populate(
-      "authorId",
-      {
-        _v: 0,
-        publications: 0,
-      }
-    );
+    const user = await PublicationModel.findById(publicationId)
 
     if (!user) {
       return res.status(404).json({
@@ -93,13 +89,7 @@ export async function updatePublication(req, res) {
       });
     }
 
-    const found = await PublicationModel.findById(publicationId).populate(
-      "authorId",
-      {
-        _v: 0,
-        publications: 0,
-      }
-    );
+    const found = await PublicationModel.findById(publicationId);
 
     if (!found) {
       return res.status(404).json({
@@ -124,13 +114,7 @@ export async function updatePublication(req, res) {
 export async function deletePublication(req, res) {
   const { publicationId } = req.params;
   try {
-    const found = await PublicationModel.findById(publicationId).populate(
-      "authorId",
-      {
-        _v: 0,
-        publications: 0,
-      }
-    );
+    const found = await PublicationModel.findById(publicationId);
 
     if (!found) {
       return res.status(404).json({

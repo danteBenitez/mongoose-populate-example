@@ -17,6 +17,9 @@ dependencies:
   mongoose:
     specifier: ^7.5.3
     version: 7.5.3
+  mongoose-autopopulate:
+    specifier: ^1.0.1
+    version: 1.0.1(mongoose@7.5.3)
 
 devDependencies:
   nodemon:
@@ -521,6 +524,14 @@ packages:
       socks: 2.7.1
     optionalDependencies:
       '@mongodb-js/saslprep': 1.1.0
+    dev: false
+
+  /mongoose-autopopulate@1.0.1(mongoose@7.5.3):
+    resolution: {integrity: sha512-39rN0QQinA1iz/8JNVKM3MNq/zZrjStiWi8jA15diUC2nnJsvEgRXEir4L4D1azYxY+gBTuqEzLqd7Y+MC6pHQ==}
+    peerDependencies:
+      mongoose: 6.x || 7.x
+    dependencies:
+      mongoose: 7.5.3
     dev: false
 
   /mongoose@7.5.3:
